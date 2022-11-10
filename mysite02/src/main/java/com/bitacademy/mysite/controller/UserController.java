@@ -40,10 +40,10 @@ public class UserController extends HttpServlet {
 		} else if("joinsuccess".equals(action)) {
 			request.getRequestDispatcher("/WEB-INF/views/user/joinsuccess.jsp").forward(request, response);
 		} else if("updateform".equals(action)) {
-			//// Access Control
-			HttpSession session = request.getSession(true);
-			UserVo authUser = (UserVo)request.getAttribute("authUser");
-			if(authUser != null) {
+			//// Access Control (접근제어)
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			if(authUser == null) {
 				response.sendRedirect(request.getContextPath() + "/user?a=loginform");
 				return;
 			}
@@ -51,7 +51,32 @@ public class UserController extends HttpServlet {
 			UserVo vo = new UserDao().findByNo(authUser.getNo());
 			request.setAttribute("userVo", vo);
 			request.getRequestDispatcher("/WEB-INF/views/user/updateform.jsp").forward(request, response);
-		} else if("loginform".equals(action)) {
+		} else if("update".equals(action)) {
+			//// Access Control (접근제어)
+			HttpSession session = request.getSession();
+			UserVo authUser = (UserVo)session.getAttribute("authUser");
+			if(authUser == null) {
+				response.sendRedirect(request.getContextPath() + "/user?a=loginform");
+				return;
+			}
+			////
+			String name = request.getParameter("name");
+			String password = request.getParameter("password");
+			String gender = request.getParameter("gender");
+			
+			UserVo vo = new UserVo();
+			vo.setNo(authUser.getNo());
+			vo.setName(name);
+			vo.setPassword(password);
+			vo.setGender(gender);
+			// update db
+			new UserDao().update(vo);
+			// update session
+			authUser.setName(name);
+			
+			response.sendRedirect(request.getContextPath() + "/user?a=updateform");
+			
+		}  else if("loginform".equals(action)) {
 			request.getRequestDispatcher("/WEB-INF/views/user/loginform.jsp").forward(request, response);
 		} else if("login".equals(action)) {
 			String email = request.getParameter("email");
