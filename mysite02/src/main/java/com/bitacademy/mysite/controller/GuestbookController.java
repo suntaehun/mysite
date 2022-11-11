@@ -18,12 +18,8 @@ public class GuestbookController extends HttpServlet {
 
 		String action = request.getParameter("a");
 		
-		if("list".equals(action)) {
-			List<GuestbookVo> list = new GuestbookDao().findAll();
-			request.setAttribute("list", list);
 			
-			request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp").forward(request, response);
-		} else if("insert".equals(action)) {
+		if("insert".equals(action)) {
 			String name = request.getParameter("name");
 			String password = request.getParameter("password");
 			String contents = request.getParameter("contents");
@@ -37,6 +33,18 @@ public class GuestbookController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/guestbook?a=list");
 		} else if("deleteform".equals(action)) {
 			request.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp").forward(request, response);			
+		} else if("delete".equals(action)) {
+			String sno = request.getParameter("no");
+			Long no = Long.parseLong(sno);
+			String password = request.getParameter("password");
+			
+			new GuestbookDao().deleteByNoAndPassword(no, password);
+			response.sendRedirect(request.getContextPath() + "/guestbook?a=list");
+		} else {
+			List<GuestbookVo> list = new GuestbookDao().findAll();
+			request.setAttribute("list", list);
+			
+			request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp").forward(request, response);
 		}
 	}
 
