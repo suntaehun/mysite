@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bitacademy.mysite.vo.BoardVo;
-import com.bitacademy.mysite.vo.GuestbookVo;
 
 public class BoardDao {
 
@@ -56,6 +55,65 @@ public class BoardDao {
 		return result;
 	}
 
+	public List<BoardVo> findAll() {
+		List<BoardVo> result = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = getConnection();
+			
+			String sql ="select a.no, a.title, a.hit, date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'), a.depth, a.user_no, b.name"
+					+ "	from board a, user b"
+					+ "   where a.user_no = b.no"
+					+ "  order by group_no asc, order_no asc";
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Long no = rs.getLong(1);
+				String title = rs.getString(2);
+				Long hit = rs.getLong(3);
+				String regDate = rs.getString(4);
+				Long depth= rs.getLong(5);
+				Long userNo = rs.getLong(6);
+				String name = rs.getString(7);
+				
+				BoardVo vo = new BoardVo();
+				vo.setNo(no);
+				vo.setTilte(title);
+				vo.setHit(hit);
+				vo.setRegDate(regDate);
+				vo.setDepth(depth);
+				vo.setUserNo(userNo);
+				vo.setName(name);
+				
+				result.add(vo);
+			}
+	} catch (SQLException e) {
+		System.out.println("Error:" + e);
+	} finally {
+		try {
+			if(rs != null) {
+				rs.close();
+			}
+			
+			if(pstmt != null) {
+				pstmt.close();
+			}
+			
+			if(conn != null) {
+				conn.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}		
+	
+	return result;
+}
 
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
@@ -71,4 +129,6 @@ public class BoardDao {
 
 		return conn;
 	}
+
+
 }

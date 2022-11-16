@@ -10,6 +10,7 @@ public class BoardVo {
 	private Long orderNo;
 	private Long depth;
 	private Long userNo;
+	private String name;
 	/**
 	 * @return the no
 	 */
@@ -118,11 +119,23 @@ public class BoardVo {
 	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
 	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", tilte=" + tilte + ", contents=" + contents + ", hit=" + hit + ", regDate="
 				+ regDate + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
-				+ "]";
+				+ ", name=" + name + "]";
 	}
 
 }

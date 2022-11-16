@@ -52,6 +52,8 @@ public class BoardController extends HttpServlet {
 		} else if("view".equals(action)){
 			request.getRequestDispatcher("/WEB-INF/views/board/view.jsp").forward(request, response);			
 		} else {
+			List<BoardVo> list = new BoardDao().findAll();
+			request.setAttribute("list", list);
 			
 			request.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(request, response);
 		}
