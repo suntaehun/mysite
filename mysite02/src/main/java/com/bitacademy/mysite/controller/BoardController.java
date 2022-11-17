@@ -31,13 +31,13 @@ public class BoardController extends HttpServlet {
 			
 			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
-			Long hit = 0L;
-			Long groupNo = 1L;
-			Long orderNo = 1L;
-			Long depth = 0L;
+			int hit = 0;
+			Integer groupNo = 1;
+			Integer orderNo = 1;
+			Integer depth = 0;
 			
 			BoardVo vo = new BoardVo();
-			vo.setTilte(title);
+			vo.setTitle(title);
 			vo.setContents(contents);
 			vo.setHit(hit);
 			vo.setGroupNo(groupNo);

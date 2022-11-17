@@ -1,4 +1,4 @@
-package com.bitacademy.mysite.dao;
+package com.bitacademy.mysite.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.bitacademy.mysite.vo.BoardVo;
 
-public class BoardDao {
+@Repository
+public class BoardRepository {
 
 	public boolean write(BoardVo vo) {
 		boolean result = false;

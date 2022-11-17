@@ -2,15 +2,15 @@ package com.bitacademy.mysite.vo;
 
 public class BoardVo {
 	private Long no;
-	private String tilte;
+	private String title;
 	private String contents;
-	private Long hit;
+	private int hit; 
 	private String regDate;
-	private Long groupNo;
-	private Long orderNo;
-	private Long depth;
+	private Integer groupNo;
+	private Integer orderNo;
+	private Integer depth;
 	private Long userNo;
-	private String name;
+	private String userName;
 	/**
 	 * @return the no
 	 */
@@ -24,16 +24,16 @@ public class BoardVo {
 		this.no = no;
 	}
 	/**
-	 * @return the tilte
+	 * @return the title
 	 */
-	public String getTilte() {
-		return tilte;
+	public String getTitle() {
+		return title;
 	}
 	/**
-	 * @param tilte the tilte to set
+	 * @param title the title to set
 	 */
-	public void setTilte(String tilte) {
-		this.tilte = tilte;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	/**
 	 * @return the contents
@@ -50,13 +50,13 @@ public class BoardVo {
 	/**
 	 * @return the hit
 	 */
-	public Long getHit() {
+	public int getHit() {
 		return hit;
 	}
 	/**
 	 * @param hit the hit to set
 	 */
-	public void setHit(Long hit) {
+	public void setHit(int hit) {
 		this.hit = hit;
 	}
 	/**
@@ -74,37 +74,37 @@ public class BoardVo {
 	/**
 	 * @return the groupNo
 	 */
-	public Long getGroupNo() {
+	public Integer getGroupNo() {
 		return groupNo;
 	}
 	/**
 	 * @param groupNo the groupNo to set
 	 */
-	public void setGroupNo(Long groupNo) {
+	public void setGroupNo(Integer groupNo) {
 		this.groupNo = groupNo;
 	}
 	/**
 	 * @return the orderNo
 	 */
-	public Long getOrderNo() {
+	public Integer getOrderNo() {
 		return orderNo;
 	}
 	/**
 	 * @param orderNo the orderNo to set
 	 */
-	public void setOrderNo(Long orderNo) {
+	public void setOrderNo(Integer orderNo) {
 		this.orderNo = orderNo;
 	}
 	/**
 	 * @return the depth
 	 */
-	public Long getDepth() {
+	public Integer getDepth() {
 		return depth;
 	}
 	/**
 	 * @param depth the depth to set
 	 */
-	public void setDepth(Long depth) {
+	public void setDepth(Integer depth) {
 		this.depth = depth;
 	}
 	/**
@@ -120,22 +120,22 @@ public class BoardVo {
 		this.userNo = userNo;
 	}
 	/**
-	 * @return the name
+	 * @return the userName
 	 */
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 	/**
-	 * @param name the name to set
+	 * @param userName the userName to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", tilte=" + tilte + ", contents=" + contents + ", hit=" + hit + ", regDate="
+		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", regDate="
 				+ regDate + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
-				+ ", name=" + name + "]";
+				+ ", userName=" + userName + "]";
 	}
-
+	
 }
