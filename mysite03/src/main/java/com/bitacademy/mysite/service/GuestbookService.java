@@ -23,6 +23,8 @@ public class GuestbookService {
 	}
 	
 	public void addContents(GuestbookVo vo){
+		System.out.println(vo);
 		guestbookRepository.insert(vo);
+		System.out.println(vo);
 	}
 }
