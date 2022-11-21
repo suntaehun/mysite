@@ -3,9 +3,7 @@ package com.bitacademy.mysite.repository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -64,63 +62,7 @@ public class BoardRepository {
 	}
 
 	public List<BoardVo> findAll() {
-		List<BoardVo> result = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			conn = getConnection();
-			
-			String sql ="select a.no, a.title, a.hit, date_format(a.reg_date, '%Y/%m/%d %H:%i:%s'), a.depth, a.user_no, b.name"
-					+ "	from board a, user b"
-					+ "   where a.user_no = b.no"
-					+ "  order by group_no asc, order_no asc";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				Long no = rs.getLong(1);
-				String title = rs.getString(2);
-				int hit = rs.getInt(3);
-				String regDate = rs.getString(4);
-				Integer depth= rs.getInt(5);
-				Long userNo = rs.getLong(6);
-				String userName = rs.getString(7);
-				
-				BoardVo vo = new BoardVo();
-				vo.setNo(no);
-				vo.setTitle(title);
-				vo.setHit(hit);
-				vo.setRegDate(regDate);
-				vo.setDepth(depth);
-				vo.setUserNo(userNo);
-				vo.setUserName(userName);
-				
-				result.add(vo);
-			}
-	} catch (SQLException e) {
-		System.out.println("Error:" + e);
-	} finally {
-		try {
-			if(rs != null) {
-				rs.close();
-			}
-			
-			if(pstmt != null) {
-				pstmt.close();
-			}
-			
-			if(conn != null) {
-				conn.close();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}		
-	
-	return result;
+		return sqlSession.selectList("board.findAll");
 }
 
 	private Connection getConnection() throws SQLException {

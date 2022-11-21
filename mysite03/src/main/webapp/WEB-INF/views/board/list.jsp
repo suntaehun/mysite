@@ -1,13 +1,8 @@
-<%@page import="com.bitacademy.mysite.vo.BoardVo"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<%
-	List<BoardVo> list = (List<BoardVo>)request.getAttribute("list");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,24 +28,20 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-<%
-	int count = list.size();
-	for (BoardVo vo : list) {
-%>					
+				<c:set var='count' value='${fn:length(list) }' /> 
+				<c:forEach var="vo" items="${list }" varStatus="status">		
 					
 					<tr>
-						<td><%=count-- %></td>
+						<td>${count-status.index }</td>
 						<td style="text-align:left; padding-left:${0*20}px">
-							<a href="board?a=view&no=<%=vo.getNo() %>"><%=vo.getTitle() %>.</a>
+							<a href="boar/view/${vo.no }">${vo.title }.</a>
 						</td>
-						<td><%=vo.getUserName() %></td>
-						<td><%=vo.getHit() %></td>
-						<td><%=vo.getRegDate() %></td>
+						<td>${vo.userName }</td>
+						<td>${vo.hit }</td>
+						<td>${vo.regDate }</td>
 						<td><a href="" class="del">삭제</a></td>
 					</tr>
-<%
-	}
-%>
+				</c:forEach>
 				</table>
 				
 				<!-- pager 추가 -->
@@ -71,7 +62,7 @@
 				<c:choose>
 					<c:when test="${not empty authUser }">
 
-						<a href="board?a=writeform" id="new-book">글쓰기</a>					
+						<a href="${pageContext.request.contextPath }/board/writeform" id="new-book">글쓰기</a>					
 					</c:when>
 				</c:choose>		
 
