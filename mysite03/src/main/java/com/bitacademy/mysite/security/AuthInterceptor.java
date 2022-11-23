@@ -44,7 +44,12 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return false;
 		}
 		
-		// 5. @Auth도 붙어있고 인증도 되어있다.
+		// 6. role(권한) 체크하기 "user", "admin"
+		String role = auth.role();
+		String authUserRole = authUser.getRole();
+		
+		
+		// 7. @Auth도 붙어있고 인증도 되어 있고 권한도 있음.
 		return true;
 	}
 
