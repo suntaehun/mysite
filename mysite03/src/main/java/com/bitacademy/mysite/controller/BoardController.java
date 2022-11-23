@@ -28,4 +28,10 @@ public class BoardController {
 	public String writeform() {
 		return "/board/writeform";
 	}
+	
+	@RequestMapping("/write")
+	public String write(BoardVo vo) {
+		boardService.addContents(vo);
+		return "redirect:/board/list";
+	}
 }

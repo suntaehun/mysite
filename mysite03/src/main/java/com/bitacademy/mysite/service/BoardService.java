@@ -14,10 +14,10 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 
-//	public void addContents(BoardVo vo) {
-//		
-//	}
-//	
+	public void addContents(BoardVo vo) {
+		boardRepository.write(vo);
+	}
+	
 //	public BoardVo findContents(Long no) {
 //		return null;
 //	}
