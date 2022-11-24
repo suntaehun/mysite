@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%
+pageContext.setAttribute("newLine", "\n");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,21 +23,19 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>제목입니다.</td>
+						<td>${title }</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								내용 1입니다.<br>
-								내용 2입니다.<br>
-								내용 3입니다.
+								${fn:replace(contents, newLine, '<br/>') }
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="board?a=list">글목록</a>
+					<a href="${pageContext.request.contextPath }/board/list">글목록</a>
 					<a href="">글수정</a>
 					<a href="">답글</a>
 				</div>

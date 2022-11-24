@@ -18,10 +18,10 @@ public class BoardService {
 		boardRepository.write(vo);
 	}
 	
-//	public BoardVo findContents(Long no) {
-//		return null;
-//	}
-//
+	public BoardVo findContents(Long no) {
+		return boardRepository.view(no);
+	}
+
 //	public BoardVo findContents(Long no, Long userNo) {
 //		return null;
 //	}
@@ -42,9 +42,9 @@ public class BoardService {
 //	public void updateContents(BoardVo vo) {
 //		
 //	}
-//
-//	public void deleteContents(Long no, Long UserNo) {
-//		
-//	}
+
+	public void deleteContents(Long no, Long userNo) {
+		boardRepository.delete(no);
+	}
 
 }

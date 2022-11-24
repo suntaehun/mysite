@@ -34,12 +34,16 @@
 					<tr>
 						<td>${count-status.index }</td>
 						<td style="text-align:left; padding-left:${0*20}px">
-							<a href="boar/view/${vo.no }">${vo.title }.</a>
+							<a href="${pageContext.request.contextPath }/board/view/${vo.no }">${vo.title }.</a>
 						</td>
 						<td>${vo.userName }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.regDate }</td>
-						<td><a href="" class="del">삭제</a></td>
+						<td>
+							<c:if test="${authUser.no == vo.userNo }">
+								<a href="" class="del">삭제</a>
+							</c:if>
+						</td>
 					</tr>
 				</c:forEach>
 				</table>
@@ -62,7 +66,7 @@
 				<c:choose>
 					<c:when test="${not empty authUser }">
 
-						<a href="${pageContext.request.contextPath }/board/writeform" id="new-book">글쓰기</a>					
+						<a href="${pageContext.request.contextPath }/board/write/${authUser.no}" id="new-book">글쓰기</a>					
 					</c:when>
 				</c:choose>		
 

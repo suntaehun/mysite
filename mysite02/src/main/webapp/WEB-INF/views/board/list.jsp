@@ -41,9 +41,9 @@
 					<tr>
 						<td><%=count-- %></td>
 						<td style="text-align:left; padding-left:${0*20}px">
-							<a href="board?a=view&no=<%=vo.getNo() %>"><%=vo.getTilte() %>.</a>
+							<a href="board?a=view&no=<%=vo.getNo() %>"><%=vo.getTitle() %>.</a>
 						</td>
-						<td><%=vo.getName() %></td>
+						<td><%=vo.getUserName() %></td>
 						<td><%=vo.getHit() %></td>
 						<td><%=vo.getRegDate() %></td>
 						<td><a href="" class="del">삭제</a></td>
