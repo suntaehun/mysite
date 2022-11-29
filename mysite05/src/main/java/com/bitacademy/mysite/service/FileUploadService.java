@@ -15,49 +15,49 @@ import com.bitacademy.mysite.exception.FileUploadServiceException;
 
 @Service
 public class FileUploadService {
-	
+
 	@Autowired
 	private Environment env;
-
-	public String restore(MultipartFile multipartFile) throws FileUploadServiceException{
+	
+	public String restore(MultipartFile multipartFile) throws FileUploadServiceException {
 		String url = null;
-
+		
 		try {
-			if (multipartFile.isEmpty()) {
+			if(multipartFile.isEmpty()) {
 				return url;
 			}
 			
-			File restoreDirectory = new File(env.getProperty("fileupload.resourceMapping"));
+			File restoreDirectory = new File(env.getProperty("fileupload.uploadLocation"));
 			if(!restoreDirectory.exists()) {
 				restoreDirectory.mkdirs();
 			}
-
+			
 			String originalFilename = multipartFile.getOriginalFilename();
 			String extName = originalFilename.substring(originalFilename.lastIndexOf('.') + 1);
 			String restoreFilename = generateSaveFilename(extName);
 			Long fileSize = multipartFile.getSize();
-
+			
 			System.out.println("################" + originalFilename);
 			System.out.println("################" + restoreFilename);
 			System.out.println("################" + fileSize);
-			byte[] date = multipartFile.getBytes();
+			byte[] data = multipartFile.getBytes();
 			
-			OutputStream os = new FileOutputStream(env.getProperty("fileupload.resourceMapping") + "/" + restoreFilename);
-			os.write(date);
+			OutputStream os = new FileOutputStream(env.getProperty("fileupload.uploadLocation") + "/" + restoreFilename);
+			os.write(data);
 			os.close();
 			
-			url = env.getProperty("fileupload.uploadLocation") + "/" + restoreFilename;
+			url = env.getProperty("fileupload.resourceMapping") + "/" + restoreFilename;
 		} catch (IOException e) {
 			throw new FileUploadServiceException(e.toString());
 		}
-
+		
 		return url;
-
+		
 	}
 
 	private String generateSaveFilename(String extName) {
 		String filename = "";
-
+		
 		Calendar calendar = Calendar.getInstance();
 		filename += calendar.get(Calendar.YEAR);
 		filename += calendar.get(Calendar.MONTH);
@@ -67,7 +67,7 @@ public class FileUploadService {
 		filename += calendar.get(Calendar.SECOND);
 		filename += calendar.get(Calendar.MILLISECOND);
 		filename += ("." + extName);
-
+		
 		return filename;
 	}
 

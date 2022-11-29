@@ -50,8 +50,8 @@ $(function(){
 			<div id="gallery">
 				<div>
 					<h1>갤러리</h1>
-					<c:if test="${not empty authUser && authUser.role == 'admin'}">
-						<a href="" id="upload-image">이미지 올리기</a>					
+					<c:if test="${not empty authUser && authUser.role == 'admin' }">
+						<a href="" id="upload-image">이미지 올리기</a>
 					</c:if>
 				</div>
 				<ul>
@@ -61,12 +61,14 @@ $(function(){
 								data-lightbox="gallery"
 								class="image"
 								style="background-image:url('${pageContext.request.contextPath }${vo.url }')">&nbsp;</a>
-							<c:if test="${not empty authUser && authUser.role == 'admin'}">	
+								
+							<c:if test="${not empty authUser && authUser.role == 'admin' }">
 								<a	href="${pageContext.request.contextPath }/gallery/delete/${vo.no }"
+									style="background-image: url('${pageContext.request.contextPath }/assets/images/delete-image.png')"
 									class="del-button"
 									title="삭제">삭제</a>
 							</c:if>	
-						</li>					
+						</li>
 					</c:forEach>
 				</ul>	
 			</div>
