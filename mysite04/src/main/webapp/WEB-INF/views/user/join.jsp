@@ -24,7 +24,7 @@
 					method="post"
 					action="${pageContext.request.contextPath }/user/join">
 					<label class="block-label" for="name">
-						<spring:message code="Join.form.label.name"/>
+						<spring:message code="Join.form.label.name" text="이름"/>
 					</label>
 					<form:input path="name" />
 					

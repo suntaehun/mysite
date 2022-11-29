@@ -11,14 +11,14 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@PropertySource("classpsth:com/bitacademy/mysite/config/web/fileupload.properties")
+@PropertySource("classpath:com/bitacademy/mysite/config/web/fileupload.properties")
 public class FileUploadConfig implements WebMvcConfigurer {
 	@Autowired
 	private Environment env;
 	
 	// Multipart Resolver
 	@Bean
-	public MultipartResolver commonsMultipartResolver() {
+	public MultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setMaxUploadSize(env.getProperty("fileupload.maxUploadSize", Long.class));
 		multipartResolver.setMaxInMemorySize(env.getProperty("fileupload.maxInMemorySize", Integer.class));
@@ -29,8 +29,8 @@ public class FileUploadConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
-				.addResourceLocations(env.getProperty("fileupload.uploadLocation"));
+		registry.addResourceHandler(env.getProperty("fileupload.resourceMapping") + "/**")
+				.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation") + "/");
 	}
 	
 }
