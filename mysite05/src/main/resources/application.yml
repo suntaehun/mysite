@@ -8,9 +8,14 @@ spring:
          enabled: true
    # mvc
    mvc:
+      static-path-pattern: /assets/**
+      throw-exception-if-no-handler-found: true
       view:
          prefix: /WEB-INF/views/
          suffix: .jsp
+   web:
+      resource:
+         static-locations: classpath:/assets, file:/mysite-uploads/
    # multipart
    servlet:
       multipart:
