@@ -2,10 +2,12 @@
 spring:
    application:
       name: mysite
-   # devtools - live reload
+   
+   # devtools - live reload   
    devtools:
       livereload:
          enabled: true
+         
    # mvc
    mvc:
       static-path-pattern: /assets/**
@@ -14,23 +16,27 @@ spring:
          prefix: /WEB-INF/views/
          suffix: .jsp
    web:
-      resource:
-         static-locations: classpath:/assets, file:/mysite-uploads/
+      resources:
+         static-locations: classpath:/assets/, file:/mysite-uploads/
+
    # multipart
    servlet:
       multipart:
          enabled: true
          max-file-size: 10MB
          max-request-size: 50MB
-   # messages resource(internationalization: i18n)
+   
+   # messages resource(internationalization, i18n)
    messages:
       always-message-format: true
       basename: web/messages_ko
       encoding: utf-8
-   # aop(@EnableAspectJAutoProxy)
+   
+   # aop
    aop:
       auto: true
       proxy-target-class: true
+      
    # datasource
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
@@ -40,9 +46,11 @@ spring:
       hikari:
          minimum-idle: 10
          maximum-pool-size: 20
+
 # mybatis
 mybatis:
    config-location: classpath:mybatis/configuration.xml
+
 # server
 server:
    port: 8888
@@ -51,13 +59,14 @@ server:
       encoding:
          charset: utf-8
          enabled: true
+
 # logging
 logging:
    pattern:
       file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
    logback:
       rollingpolicy:
-         file-name-pattern: /${spring.application.name}-logs/exception.%d{yyyy-mm-dd}.%i.log.zip
+         file-name-pattern: /${spring.application.name}-logs/exception.%d{yyyy-MM-dd}.%i.log.zip   	
          max-file-size: 200MB
          max-history: 10
    file: /${spring.application.name}-logs/exception.log
@@ -67,4 +76,3 @@ logging:
          bitacademy:
             mysite:
                exception: ERROR
-         
